@@ -20,4 +20,4 @@ while True:
         urllib.urlopen(url + value, data=nodata)
     except Exception as e:
         log('x')
-    time.sleep(1)
+    time.sleep(0.01)
