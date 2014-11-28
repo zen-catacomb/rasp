@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.IN)
 
 def log(msg):
-    sys.stdout.write('.')
+    sys.stdout.write(msg)
     sys.stdout.flush()
 
 while True:
