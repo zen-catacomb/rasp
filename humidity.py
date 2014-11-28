@@ -1,5 +1,9 @@
+import urllib
 import RPi.GPIO as GPIO
 import time
+
+url='http://zen-catacomb.herokuapp.com/light/'
+nodata = "".encode("UTF-8")
 
 def bin2dec(string_num):
     return str(int(string_num, 2))
