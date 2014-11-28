@@ -15,7 +15,7 @@ def log(msg):
 
 while True:
     try:
-        value=str(GPIO.input(4))
+        value=str(1-GPIO.input(4))
         log(value)
         urllib.urlopen(url + value, data=nodata, timeout=1)
     except Exception as e:
