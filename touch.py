@@ -7,7 +7,7 @@ url='http://zen-catacomb.herokuapp.com/touch/'
 nodata = "".encode("UTF-8")
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(4,GPIO.IN)
+GPIO.setup(17,GPIO.IN)
 
 def log(msg):
     sys.stdout.write( time.strftime("%H:%M:%S") + " - " + msg + "\n")
@@ -16,7 +16,7 @@ def log(msg):
 prev = 0
 while True:
     try:
-        value = GPIO.input(4)
+        value = GPIO.input(17)
         if( value == 0 and prev == 1 ):
           log("touch event")
           urllib.urlopen(url, data=nodata)
