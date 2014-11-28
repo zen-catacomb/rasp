@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.IN)
 
 def log(msg):
-    sys.stdout.write( time.strftime("%H:%M:%S") + msg + "\n")
+    sys.stdout.write( time.strftime("%H:%M:%S") + " - " + msg + "\n")
     sys.stdout.flush()
 
 while True:

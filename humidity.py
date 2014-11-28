@@ -8,23 +8,23 @@ urlTemp='http://zen-catacomb.herokuapp.com/temperature/'
 nodata = "".encode("UTF-8")
 
 def log(msg):
-    sys.stdout.write(time.strftime("%H:%M:%S") + msg + "\n")
+    sys.stdout.write(time.strftime("%H:%M:%S") + " - " + msg + "\n")
     sys.stdout.flush()
 
 def bin2dec(string_num):
-    return str(int(string_num, 2))
-
-GPIO.setmode(GPIO.BCM)
-
-GPIO.setup(4,GPIO.OUT)
-GPIO.output(4,GPIO.HIGH)
-time.sleep(0.025)
-GPIO.output(4,GPIO.LOW)
-time.sleep(0.02)
-
-GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    return int(string_num, 2)
 
 while True:
+  time.sleep(0.5)
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(4,GPIO.OUT)
+  GPIO.output(4,GPIO.HIGH)
+  time.sleep(0.025)
+  GPIO.output(4,GPIO.LOW)
+  time.sleep(0.02)
+
+  GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
   data = []
 
   for i in range(0,500):
@@ -63,9 +63,9 @@ while True:
           HumidityBit = HumidityBit + "0"
         if i>=16 and i<24:
           TemperatureBit = TemperatureBit + "0"
-
   except:
     log("ERR_RANGE")
+    continue
 
   try:
     for i in range(0, 8):
@@ -85,14 +85,15 @@ while True:
         crc = crc + "0"
   except:
     log("ERR_RANGE")
+    continue
 
-  humidity = int(bin2dec(HumidityBit))
-  temperature = int(bin2dec(TemperatureBit))
+  humidity = bin2dec(HumidityBit)
+  temperature = bin2dec(TemperatureBit)
 
-  if humidity + temperature - int(bin2dec(crc)) == 0:
-    log("Humidity:"+ str(humidity) +"%")
-    #urllib.urlopen(urlHum + Humidity, data=nodata, timeout=1)
+  if humidity + temperature - bin2dec(crc) == 0:
+    log("Humidity:"+ str(humidity) +"%")y
+    urllib.urlopen(urlHum + str(humidity), data=nodata, timeout=1)
     log("Temperature:"+ str(temperature) +"C")
-    #urllib.urlopen(urlTemp + Temperature, data=nodata, timeout=1)
+    urllib.urlopen(urlTemp + str(temperature), data=nodata, timeout=1)
   else:
     log("ERR_CRC")
