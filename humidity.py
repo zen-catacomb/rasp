@@ -88,13 +88,16 @@ while True:
     log("ERR_RANGE")
     continue
 
-  humidity = bin2dec(HumidityBit)
-  temperature = bin2dec(TemperatureBit)
+  try:
+    humidity = bin2dec(HumidityBit)
+    temperature = bin2dec(TemperatureBit)
 
-  if humidity + temperature - bin2dec(crc) == 0:
-    log("Humidity:"+ str(humidity) +"%")
-    urllib.urlopen(urlHum + str(humidity), data=nodata)
-    log("Temperature:"+ str(temperature) +"C")
-    urllib.urlopen(urlTemp + str(temperature), data=nodata)
-  else:
-    log("ERR_CRC")
+    if humidity + temperature - bin2dec(crc) == 0:
+      log("Humidity:"+ str(humidity) +"%")
+      urllib.urlopen(urlHum + str(humidity), data=nodata)
+      log("Temperature:"+ str(temperature) +"C")
+      urllib.urlopen(urlTemp + str(temperature), data=nodata)
+    else:
+      log("ERR_CRC")
+  except:
+      log("Failed to send")
