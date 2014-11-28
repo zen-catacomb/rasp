@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import urllib
+import sys
 
 urlHum ='http://zen-catacomb.herokuapp.com/humidity/'
 urlTemp='http://zen-catacomb.herokuapp.com/temperature/'
@@ -65,7 +66,6 @@ while True:
 
   except:
     log("ERR_RANGE")
-    exit(0)
 
   try:
     for i in range(0, 8):
@@ -85,15 +85,14 @@ while True:
         crc = crc + "0"
   except:
     log("ERR_RANGE")
-    exit(0)
 
-  Humidity = bin2dec(HumidityBit)
-  Temperature = bin2dec(TemperatureBit)
+  humidity = int(bin2dec(HumidityBit))
+  temperature = int(bin2dec(TemperatureBit))
 
-  if int(Humidity) + int(Temperature) - int(bin2dec(crc)) == 0:
-    log("Humidity:"+ Humidity +"%")
+  if humidity + temperature - int(bin2dec(crc)) == 0:
+    log("Humidity:"+ str(humidity) +"%")
     #urllib.urlopen(urlHum + Humidity, data=nodata, timeout=1)
-    log("Temperature:"+ Temperature +"C")
+    log("Temperature:"+ str(temperature) +"C")
     #urllib.urlopen(urlTemp + Temperature, data=nodata, timeout=1)
   else:
     log("ERR_CRC")
