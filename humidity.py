@@ -91,9 +91,9 @@ while True:
   temperature = bin2dec(TemperatureBit)
 
   if humidity + temperature - bin2dec(crc) == 0:
-    log("Humidity:"+ str(humidity) +"%")y
-    urllib.urlopen(urlHum + str(humidity), data=nodata, timeout=1)
+    log("Humidity:"+ str(humidity) +"%")
+    urllib.urlopen(urlHum + str(humidity), data=nodata)
     log("Temperature:"+ str(temperature) +"C")
-    urllib.urlopen(urlTemp + str(temperature), data=nodata, timeout=1)
+    urllib.urlopen(urlTemp + str(temperature), data=nodata)
   else:
     log("ERR_CRC")
