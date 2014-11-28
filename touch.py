@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import time
 import sys
 
-url='http://zen-catacomb.herokuapp.com/touch/'
+url='http://zen-catacomb.herokuapp.com/touch'
 nodata = "".encode("UTF-8")
 
 GPIO.setmode(GPIO.BCM)
