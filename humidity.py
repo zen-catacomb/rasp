@@ -8,13 +8,6 @@ urlHum ='http://zen-catacomb.herokuapp.com/humidity/'
 urlTemp='http://zen-catacomb.herokuapp.com/temperature/'
 nodata = "".encode("UTF-8")
 
-def bin2dec(string_num):
-    return str(int(string_num, 2))
-
-data = []
-
-GPIO.setmode(GPIO.BCM)
-
 def log(msg):
     sys.stdout.write(time.strftime("%H:%M:%S") + " - " + msg + "\n")
     sys.stdout.flush()
